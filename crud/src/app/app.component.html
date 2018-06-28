@@ -1,20 +1,50 @@
 <nav class="navbar navbar-dark bg-primary">
   <a class="navbar-brand" href="/">
-  Angular Crud
+    Crud en Angular doble enlace de datos
   </a>
 </nav>
 
 <div class="container">
   <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-8 mt-4">
 <ul class="list-group">
-
+  <!-- ngFor directiva de angular
+  class.active  de boostrap seleciona y compara -->
+<li 
+*ngFor="let empleado of empleadosArray " 
+class="list-group-item list-group-item-action"
+(click)="Editar(empleado)" 
+[class.active]="empleado == selectedEmpleado"
+>
+<span class="badge badge-primary">{{empleado.id}}</span>
+{{empleado.nombre}} - {{empleado.ciudad}}
+</li>
 </ul>
 <div class="card mt-4">
   <div class="card-body">
     <div class="card-title">
       Inserta empleado
     </div>
+
+    <div class="form-group">
+      <input type="text" [(ngModel)]="selectedEmpleado.nombre" placeholder="Inserta nombre" class="form-control">      
+    </div>
+    <div class="form-group">        
+        <input type="text" [(ngModel)]="selectedEmpleado.ciudad" placeholder="Inserta ciudad" class="form-control">  
+      </div>
+
+      <!--btn que se encarga de editar y guardar-->
+      <button (click)="agregareditar()" class="btn btn-primary">
+        Submit
+      </button>
+
+      <button 
+      *ngIf="selectedEmpleado.id !==0"
+       class="btn btn-danger"
+       (click)="eliminar()">
+          Delete
+        </button>
+
   </div>
 </div>
     </div>
